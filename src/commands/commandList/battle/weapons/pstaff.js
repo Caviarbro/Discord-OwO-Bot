@@ -48,6 +48,8 @@ module.exports = class PStaff extends WeaponInterface {
 
 		/* Remove a buff from an enemy */
 		if (attacking) {
+                        if (attacking.stats.hp[0] <= 0) return;
+
 			/* Remove buff */
 			let buffToRemove, buffFound;
 			for (let i in attacking.buffs) {
@@ -63,7 +65,7 @@ module.exports = class PStaff extends WeaponInterface {
 			/* Calculate damage */
 			let damage = WeaponInterface.getDamage(me.stats.mag, this.stats[0] / 100);
 
-			/* Deal damage and freeze*/
+			/* Deal damage */
 			damage = WeaponInterface.inflictDamage(me, attacking, damage, WeaponInterface.MAGICAL, {
 				me,
 				allies: team,
@@ -78,6 +80,8 @@ module.exports = class PStaff extends WeaponInterface {
 
 		/* Remove a debuff from an ally */
 		if (ally) {
+                        if (ally.stats.hp[0] <= 0) return;
+
 			/* Remove debuff */
 			let buffToRemove, buffFound;
 			for (let i in ally.buffs) {
